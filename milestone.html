@@ -1,0 +1,34 @@
+<body>
+   <h1>NBA Database</h1>
+   <h2>Team Members: Amiin Tahlil & Moises</h2>
+
+   <h3>Relations:</h3>
+   <ul>
+       <li><a href="nba.php?relation=players">Players</a></li>
+       <li><a href="nba.php?relation=seasons">Seasons</a></li>
+       <li><a href="nba.php?relation=teams">Teams</a></li>
+       <li><a href="nba.php?relation=headcoaches">HeadCoaches</a></li>
+       <li><a href="nba.php?relation=playerstatistics">PlayerStatistics</a></li>
+       <li><a href="nba.php?relation=teamstatistics">TeamStatistics</a></li>
+       <li><a href="nba.php?relation=useraccount">UserAccount</a></li>
+       <li><a href="nba.php?relation=export">Export</a></li>
+   </ul>
+
+   <h3>Queries:</h3>
+   <ul>
+       <li><a href="nba.php?query=query1">Query1</a>: Retrieves first and last name along with points per game of players.</li>
+       <li><a href="nba.php?query=query2">Query2</a>: Gets total number of players on each team.</li>
+       <li><a href="nba.php?query=query3">Query3</a>: Gets first and last name along with positions from teams in the Western Conference.</li>
+       <li><a href="nba.php?query=query4">Query4</a>: Calculate average height of each team and filters out which teams have players shorter than 6'5.</li>
+       <li><a href="nba.php?query=query5">Query5</a>: Gets players first and last name along with their team. If they don't have a team, then they show up as NULL (free agent).</li>
+   </ul>
+
+   <h3>Ad-hoc Query:</h3>
+   <form method="post" action="nba.php">
+       <label for="adhoc_query">Please enter your query here:</label><br>
+       <textarea id="adhoc_query" name="adhoc_query" rows="4" cols="50"></textarea><br>
+       <button type="submit" name="submit">Submit</button>
+       <button type="reset">Clear</button>
+   </form>
+</body>
+</html>
