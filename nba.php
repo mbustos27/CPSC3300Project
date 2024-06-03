@@ -4,36 +4,29 @@ $username = "ll_mbustos";
 $password = "Cpsc3300Mbustos";
 $dbname = "ll_mbustos";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 // Function to execute a query and return results as HTML
 function executeQuery($sql, $conn) {
-    // Prepare statement
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
-        echo "Error preparing the statement: " . htmlspecialchars($conn->error);
-        return;
+        return "Error preparing the statement: " . htmlspecialchars($conn->error);
     }
 
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
-        // Start table
         $output = "<table class='table'>";
         $output .= "<thead><tr>";
-        // Output header row
         while ($fieldinfo = $result->fetch_field()) {
             $output .= "<th>" . htmlspecialchars($fieldinfo->name) . "</th>";
         }
         $output .= "</tr></thead>";
         $output .= "<tbody>";
-        // Output data rows
         while($row = $result->fetch_assoc()) {
             $output .= "<tr>";
             foreach($row as $value) {
@@ -49,7 +42,6 @@ function executeQuery($sql, $conn) {
     return $output;
 }
 
-// Check if a relation or query is requested and execute the corresponding query
 if (isset($_GET['relation'])) {
     $relation = $conn->real_escape_string($_GET['relation']);
     $sql = "SELECT * FROM $relation";
@@ -68,7 +60,7 @@ if (isset($_GET['query'])) {
             $sql = "SELECT first_name, last_name, position FROM players WHERE conference = 'Western'";
             break;
         case 'query4':
-            $sql = "SELECT team_name, AVG(height) as avg_height FROM players GROUP BY team_name HAVING AVG(height) < 77"; // 6'5 is 77 inches
+            $sql = "SELECT team_name, AVG(height) as avg_height FROM players GROUP BY team_name HAVING AVG(height) < 77";
             break;
         case 'query5':
             $sql = "SELECT p.first_name, p.last_name, t.team_name FROM players p LEFT JOIN teams t ON p.team_id = t.team_id";
@@ -79,7 +71,6 @@ if (isset($_GET['query'])) {
 
 if (isset($_POST['submit'])) {
     $adhoc_query = $_POST['adhoc_query'];
-    // Basic validation
     if (!empty($adhoc_query)) {
         echo executeQuery($adhoc_query, $conn);
     } else {
