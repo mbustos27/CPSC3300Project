@@ -1,40 +1,51 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel = "stylesheet" href = "style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Database</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<header>
-    <h1>NBA Database</h1>
-</header>
 <body>
-   <h2>Team Members: Amiin Tahlil & Moises</h2>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>NBA Database</h1>
+    </header>
+    <div class="container mt-4">
+        <h2>Team Members: Amiin Tahlil & Moises</h2>
 
-   <h3>Relations:</h3>
-   <ul>
-       <li><a href="nba.php?relation=players">Players</a></li>
-       <li><a href="nba.php?relation=seasons">Seasons</a></li>
-       <li><a href="nba.php?relation=teams">Teams</a></li>
-       <li><a href="nba.php?relation=headcoaches">HeadCoaches</a></li>
-       <li><a href="nba.php?relation=playerstatistics">PlayerStatistics</a></li>
-       <li><a href="nba.php?relation=teamstatistics">TeamStatistics</a></li>
-       <li><a href="nba.php?relation=useraccount">UserAccount</a></li>
-       <li><a href="nba.php?relation=export">Export</a></li>
-   </ul>
+        <h3>Relations:</h3>
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><a href="nba.php?relation=players">Players</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=seasons">Seasons</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=teams">Teams</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=headcoaches">Head Coaches</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=playerstatistics">Player Statistics</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=teamstatistics">Team Statistics</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=useraccount">User Account</a></li>
+            <li class="list-group-item"><a href="nba.php?relation=export">Export</a></li>
+        </ul>
 
-   <h3>Queries:</h3>
-   <ul>
-       <li><a href="nba.php?query=query1">Query1</a>: Retrieves first and last name along with points per game of players.</li>
-       <li><a href="nba.php?query=query2">Query2</a>: Gets total number of players on each team.</li>
-       <li><a href="nba.php?query=query3">Query3</a>: Gets first and last name along with positions from teams in the Western Conference.</li>
-       <li><a href="nba.php?query=query4">Query4</a>: Calculate average height of each team and filters out which teams have players shorter than 6'5.</li>
-       <li><a href="nba.php?query=query5">Query5</a>: Gets players first and last name along with their team. If they don't have a team, then they show up as NULL (free agent).</li>
-   </ul>
+        <h3>Queries:</h3>
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><a href="nba.php?query=query1">Query1</a>: Retrieves first and last name along with points per game of players.</li>
+            <li class="list-group-item"><a href="nba.php?query=query2">Query2</a>: Gets total number of players on each team.</li>
+            <li class="list-group-item"><a href="nba.php?query=query3">Query3</a>: Gets first and last name along with positions from teams in the Western Conference.</li>
+            <li class="list-group-item"><a href="nba.php?query=query4">Query4</a>: Calculate average height of each team and filters out which teams have players shorter than 6'5.</li>
+            <li class="list-group-item"><a href="nba.php?query=query5">Query5</a>: Gets players first and last name along with their team. If they don't have a team, then they show up as NULL (free agent).</li>
+        </ul>
 
-   <h3>Ad-hoc Query:</h3>
-   <form method="post" action="nba.php">
-       <label for="adhoc_query">Please enter your query here:</label><br>
-       <textarea id="adhoc_query" name="adhoc_query" rows="4" cols="50"></textarea><br>
-       <button type="submit" name="submit">Submit</button>
-       <button type="reset">Clear</button>
-   </form>
+        <h3>Ad-hoc Query:</h3>
+        <form method="post" action="nba.php">
+            <div class="mb-3">
+                <label for="adhoc_query" class="form-label">Please enter your query here:</label>
+                <textarea id="adhoc_query" name="adhoc_query" class="form-control" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </form>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
