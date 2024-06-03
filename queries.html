@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Database - Queries</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">NBA Database</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="queries.html">Queries</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-primary text-white text-center py-4">
+        <h1>NBA Database</h1>
+    </header>
+    <div class="container mt-4">
+        <h3>Queries:</h3>
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><a href="#" class="query-link" data-query="query1">Query1</a>: Retrieves first and last name along with points per game of players.</li>
+            <li class="list-group-item"><a href="#" class="query-link" data-query="query2">Query2</a>: Gets total number of players on each team.</li>
+            <li class="list-group-item"><a href="#" class="query-link" data-query="query3">Query3</a>: Gets first and last name along with positions from teams in the Western Conference.</li>
+            <li class="list-group-item"><a href="#" class="query-link" data-query="query4">Query4</a>: Calculate average height of each team and filters out which teams have players shorter than 6'5.</li>
+            <li class="list-group-item"><a href="#" class="query-link" data-query="query5">Query5</a>: Gets players first and last name along with their team. If they don't have a team, then they show up as NULL (free agent).</li>
+        </ul>
+
+        <h3>Ad-hoc Query:</h3>
+        <form id="adhoc-query-form">
+            <div class="mb-3">
+                <label for="adhoc_query" class="form-label">Please enter your query here:</label>
+                <textarea id="adhoc_query" name="adhoc_query" class="form-control" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="queryModal" tabindex="-1" aria-labelledby="queryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="queryModalLabel">Query Results</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Results will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handle query links
+            $('.query-link').click(function(event) {
+                event.preventDefault();
+                let query = $(this).data('query');
+                $.get('nba.php', { query: query }, function(data) {
+                    $('#modal-body').html(data);
+                    $('#queryModal').modal('show');
+                });
+            });
+
+            // Handle ad-hoc query form submission
+            $('#adhoc-query-form').submit(function(event) {
+                event.preventDefault();
+                let adhocQuery = $('#adhoc_query').val();
+                $.post('nba.php', { adhoc_query: adhocQuery, submit: true }, function(data) {
+                    $('#modal-body').html(data);
+                    $('#queryModal').modal('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
