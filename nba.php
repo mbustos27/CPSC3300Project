@@ -1,14 +1,11 @@
 <?php
-// Load database credentials from environment variables or a separate config file
-$servername = getenv('DB_SERVERNAME');
-$username = getenv('DB_USERNAME');
-$password = getenv('DB_PASSWORD');
-$dbname = getenv('DB_NAME');
+$servername = "css1.seattleu.edu";
+$username = "ll_mbustos";
+$password = "Cpsc3300Mbustos";
+$dbname = "ll_mbustos";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -21,18 +18,18 @@ function executeQuery($sql, $conn) {
         echo "Error preparing the statement: " . htmlspecialchars($conn->error);
         return;
     }
-    
+
     $stmt->execute();
     $result = $stmt->get_result();
-    
     if ($result->num_rows > 0) {
-        echo "<table>";
-        echo "<tr>";
+        echo "<table class='table'>";
+        echo "<thead><tr>";
         // Output header row
         while ($fieldinfo = $result->fetch_field()) {
             echo "<th>" . htmlspecialchars($fieldinfo->name) . "</th>";
         }
-        echo "</tr>";
+        echo "</tr></thead>";
+        echo "<tbody>";
         // Output data rows
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
@@ -41,11 +38,10 @@ function executeQuery($sql, $conn) {
             }
             echo "</tr>";
         }
-        echo "</table>";
+        echo "</tbody></table>";
     } else {
         echo "0 results";
     }
-    
     $stmt->close();
 }
 
